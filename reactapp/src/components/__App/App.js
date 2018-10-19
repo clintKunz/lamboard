@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
+import {Auth0Lock} from 'auth0-lock';
 
 // Components
 import { ThreadPage } from '../../components';
@@ -15,11 +16,21 @@ const AppContainer = styled.div`
 	margin: 0 auto;
 `;
 
+//auth0 lock
+var lock = new Auth0Lock(
+	process.env.REACT_APP_CLIENT_ID, 
+	process.env.REACT_APP_DOMAIN_URL
+  );
+
 class App extends Component {
 	render() {
+		console.log(process.env);
 		return (
 			<AppContainer>
 				{/* <Navbar /> */}
+				<div onClick={function() {
+					lock.show();
+				}}>LOG IN</div>
 				<div className="placeholder">This is a placeholder.</div>
 				{/* <Route exact path="/" component={HomePage} /> */}
 				{/* <Route exact path="/:boardName" component={BoardPage} /> */}
