@@ -51,6 +51,7 @@ class App extends Component {
 				<AppContainer>
 					{/* <Navbar /> */}
 					<div className="placeholder">This is a placeholder.</div>
+					<div onClick={this.logout}>LOG OUT</div>
 					{/* <Route exact path="/" component={HomePage} /> */}
 					{/* <Route exact path="/:boardName" component={BoardPage} /> */}
 					<Route path="/:boardName/:threadId" component={ThreadPage} />
@@ -74,6 +75,14 @@ class App extends Component {
 		let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
 		//returns a true or false
 		return new Date().getTime() < expiresAt;
+	}
+
+	logout() {
+		//clear access token and expires token from local storage
+		//and refresh page
+		localStorage.removeItem('access_token');
+		localStorage.removeItem('expires_at');
+		window.location.reload();
 	}
 }
 
